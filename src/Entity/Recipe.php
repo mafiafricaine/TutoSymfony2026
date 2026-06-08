@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use App\Repository\RecipeRepository;
+use App\Validator\InappropriateWords;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\Table(name: "recipes")]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('title')]
 class Recipe
 {
     #[ORM\Id]
@@ -17,22 +22,29 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le champ ne peut pas être vide !")]
+    #[Assert\Length(min: 10,max: 50,minMessage: "Le champ doit contenir minimum 10 caractères !", maxMessage: "Le champ doit contenir maximum 50 caractères !")]
+    #[InappropriateWords()]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Oups !! Le champ ne peut pas être vide !")]
+    #[Assert\Length(min: 20,minMessage: "Le champ doit contenir minimum 20 caractères !")]
     private ?string $content = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    use Timestampable;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(message: "Le champ ne peut pas être vide !")]
+    #[Assert\Positive(message: "Le champ doit être positif !")]
+    #[Assert\LessThanOrEqual(1440,message: "Le champ ne doit pas dépasser 24h !")]
     private ?int $duration = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $imageName = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 
     public function getId(): ?int
     {
@@ -75,39 +87,7 @@ class Recipe
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
-    public function updateTimestamps()
-    {
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTimeImmutable);
-        }
-        $this->setUpdatedAt(new \DateTimeImmutable);
-    }
+    
 
     public function getDuration(): ?int
     {
@@ -117,6 +97,18 @@ class Recipe
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
 
         return $this;
     }

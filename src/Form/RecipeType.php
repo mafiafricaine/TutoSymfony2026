@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
+
 class RecipeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -25,6 +26,7 @@ class RecipeType extends AbstractType
             ])
             ->add('slug', HiddenType::class)
             ->add('content', TextareaType::class)
+            ->add('imageName')
             ->add('duration')
             ->add('save',SubmitType::class,[
                 'label' => 'envoyer' 
