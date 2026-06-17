@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -22,14 +23,20 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('title',TextType::class,[
-                'label' => 'Titre'
+                'label' => "recipeForm.title"
             ])
             ->add('slug', HiddenType::class)
-            ->add('content', TextareaType::class)
-            ->add('imageName')
-            ->add('duration')
+            ->add('content', TextareaType::class,[
+                'label' => "recipeForm.content"
+            ])
+            ->add('imageName',TextType::class,[
+                'label' => "recipeForm.imageName"
+            ])
+            ->add('duration',NumberType::class,[
+                'label' => "recipeForm.duration"
+            ])
             ->add('save',SubmitType::class,[
-                'label' => 'envoyer' 
+                'label' => "recipeForm.save"
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))
         ;

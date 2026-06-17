@@ -105,7 +105,9 @@ final class RecipeController extends AbstractController
         $recipe = new Recipe;
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
+        // dd($this->getUser());
         if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setUser($this->getUser());
             $em->persist($recipe);
             $em->flush();
             $this->addFlash('success', 'La recette ' . $recipe->getTitle() . ' a bien été créée');
