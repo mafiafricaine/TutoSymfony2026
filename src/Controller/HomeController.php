@@ -18,7 +18,8 @@ final class HomeController extends AbstractController
         // dump($request);
         // die;
         // dd($request);
-        // return new Response("Hello " . $request->query->get("nom","World !!!"));
+        // return new Response("Hello " . $request->query->get("nom","World !!!"))
+        
         return $this->render('home/index.html.twig');
     }
 }

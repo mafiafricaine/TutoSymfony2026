@@ -22,8 +22,8 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le champ ne peut pas être vide !")]
-    #[Assert\Length(min: 10,max: 50,minMessage: "Le champ doit contenir minimum 10 caractères !", maxMessage: "Le champ doit contenir maximum 50 caractères !")]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 10,max: 50)]
     #[InappropriateWords()]
     private ?string $title = null;
 
@@ -31,16 +31,16 @@ class Recipe
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: "Oups !! Le champ ne peut pas être vide !")]
-    #[Assert\Length(min: 20,minMessage: "Le champ doit contenir minimum 20 caractères !")]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 20)]
     private ?string $content = null;
 
     use Timestampable;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\NotBlank(message: "Le champ ne peut pas être vide !")]
-    #[Assert\Positive(message: "Le champ doit être positif !")]
-    #[Assert\LessThanOrEqual(1440,message: "Le champ ne doit pas dépasser 24h !")]
+    #[Assert\NotBlank()]
+    #[Assert\Positive()]
+    #[Assert\LessThanOrEqual(1440)]
     private ?int $duration = null;
 
     #[ORM\Column(length: 500, nullable: true)]

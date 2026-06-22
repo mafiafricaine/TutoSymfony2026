@@ -1,0 +1,12 @@
+navBar.home: Accueil
+navBar.recipeList: 'Liste des Recettes'
+navBar.addRecipe: 'Ajouter une Recette'
+navBar.account: 'Mon Compte'
+navBar.register: "S'enregistrer"
+navBar.login: 'Se connecter'
+navBar.logout: 'Se déconnecter'
+'Forgot Password ?': 'Mot de passe oublié ?'
+'Not registered yet ?': 'Pas encore enrigistré ?'
+'Create an account': 'Créer un compte'
+registerTemplate.title: Inscription
+registerTemplate.button: "S'enregistrer"
