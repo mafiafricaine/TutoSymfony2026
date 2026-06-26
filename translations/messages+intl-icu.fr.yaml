@@ -10,3 +10,4 @@ navBar.logout: 'Se déconnecter'
 'Create an account': 'Créer un compte'
 registerTemplate.title: Inscription
 registerTemplate.button: "S'enregistrer"
+recipeController.index.emailNotVerified: "Votre adresse mail n'est pas vérifiée !"

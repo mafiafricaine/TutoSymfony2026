@@ -12,13 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
 {
     #[Route(path: "/recette", name: "app_recipe_index")]
-    public function index(RecipeRepository $repository, EntityManagerInterface $em): Response
+    public function index(RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
+        if ($this->getUser()) {
+            /**
+            * @var User 
+            */
+            $user = $this->getUser();
+            if (!$user->isVerified()) {
+                $this->addFlash("info", $translator->trans("recipeController.index.emailNotVerified"));
+            }
+        }
         //va recuperer toutes les recettes (equivalent Select *)
         //en utilisant RecipeRepository
         $recipes = $repository->findAll();
@@ -83,6 +92,23 @@ final class RecipeController extends AbstractController
     #[Route(path: '/recette/{id}/edit', name: 'app_recipe_edit')]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em): Response
     {
+        if ($this->getUser()) {
+            /**
+            * @var User 
+            */
+            $user = $this->getUser();
+            if (!$user->isVerified()) {
+                $this->addFlash('error', 'You must confirm your email to edit Recipe !');
+                return $this->redirectToRoute('app_recipe_index');
+            } elseif($recipe->getUser()->getEmail() !== $user->getEmail()){
+                $this->addFlash('error', 'You must be the user '.$recipe->getUser()->getEmail() . ' to edit this recipe' );
+                return $this->redirectToRoute('app_recipe_index');
+            }  
+        } else {
+            $this->addFlash('error', 'You must login to edit Recipe !');
+            return $this->redirectToRoute('app_login');
+        }
+
         // dd($recipe);
         //cette methode prend en premier paramètre le formulaire que l'on souhaite utiliser
         //en second paramètre elle prend les données
@@ -101,7 +127,20 @@ final class RecipeController extends AbstractController
 
     #[Route(path: '/recette/create', name: 'app_recipe_create')]
     public function create(Request $request, EntityManagerInterface $em): Response
-    {
+    {        
+        if ($this->getUser()) {
+            /**
+            * @var User 
+            */
+            $user = $this->getUser();
+            if (!$user->isVerified()) {
+                $this->addFlash('error', 'You must confirm your email to create Recipe !');
+                return $this->redirectToRoute('app_recipe_index');
+            }   
+        } else {
+            $this->addFlash('error', 'You must login to create Recipe !');
+            return $this->redirectToRoute('app_login');
+        }
         $recipe = new Recipe;
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
@@ -121,6 +160,22 @@ final class RecipeController extends AbstractController
     #[Route(path: '/recette/{id}/delete', name: 'app_recipe_delete')]
     public function delete(Recipe $recipe, EntityManagerInterface $em): Response
     {
+        if ($this->getUser()) {
+            /**
+            * @var User 
+            */
+            $user = $this->getUser();
+            if (!$user->isVerified()) {
+                $this->addFlash('error', 'You must confirm your email to delete Recipe !');
+                return $this->redirectToRoute('app_recipe_index');
+            } elseif($recipe->getUser()->getEmail() !== $user->getEmail()){
+                $this->addFlash('error', 'You must be the user '.$recipe->getUser()->getEmail() . ' to delete this recipe' );
+                return $this->redirectToRoute('app_recipe_index'); 
+            } 
+        } else {
+            $this->addFlash('error', 'You must login to delete Recipe !');
+            return $this->redirectToRoute('app_login');
+        }
         $titre = $recipe->getTitle();
         $em->remove($recipe);
         $em->flush();
