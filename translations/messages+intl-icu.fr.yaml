@@ -11,3 +11,8 @@ navBar.logout: 'Se déconnecter'
 registerTemplate.title: Inscription
 registerTemplate.button: "S'enregistrer"
 recipeController.index.emailNotVerified: "Votre adresse mail n'est pas vérifiée !"
+'Reset your password': 'Réinitialiser votre mot de passe'
+"Enter your email address, and we will send you a\n                        link to reset your password.": "Introduire votre adresse mail, et on vous enverra un\n                        lien pour réinitialiser votre mot de passe."
+'Send password reset email': "Modifier le mot de passe"
+'Reset password': 'Réinitialiser mot de passe'
+'Please sign in': 'Connectez-vous'

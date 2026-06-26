@@ -1,0 +1,13 @@
+recipeController.index.emailNotVerified: "Your email is not verified"
+navBar.home: "Home"
+navBar.recipeList: "Recipe list"
+navBar.addRecipe: "Add recipe"
+navBar.account: "Account"
+navBar.logout: Logout
+navBar.register: Register
+navBar.login: Login
+registerTemplate.title: "Sign Up"
+registerTemplate.button: Register
+'Forgot Password ?': 'Forgot Password ?'
+'Not registered yet ?': 'Not registered yet ?'
+'Create an account': 'Create an account'

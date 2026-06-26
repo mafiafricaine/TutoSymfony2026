@@ -4,5 +4,9 @@
 
 {% block body %}
     <h4>Mon BG de site des recettes incroyables mais vraies</h4>
-    <img src = "https://www.luxe-infinity-afrique.com/wp-content/uploads/2025/08/La-Cuisine-Africaine-Conquiert-la-France.webp" width = "650px" alt = "imagecuisine">
+    {% if app.request.locale == 'fr' %}
+        <img src = "https://www.luxe-infinity-afrique.com/wp-content/uploads/2025/08/La-Cuisine-Africaine-Conquiert-la-France.webp" width = "650px" alt = "imagecuisine">
+    {% else %}
+        <img src = "https://cdn.venngage.com/template/thumbnail/full/c2dde674-0171-4493-b60a-1111a5541523.webp" width = "650px" alt = "imagecuisine">
+    {% endif %}
 {% endblock %}
