@@ -1,13 +1,24 @@
-recipeController.index.emailNotVerified: "Your email is not verified"
-navBar.home: "Home"
-navBar.recipeList: "Recipe list"
-navBar.addRecipe: "Add recipe"
-navBar.account: "Account"
+recipeController.index.emailNotVerified: 'Your email is not verified'
+navBar.home: Home
+navBar.recipeList: 'Recipe list'
+navBar.addRecipe: 'Add recipe'
+navBar.account: Account
 navBar.logout: Logout
 navBar.register: Register
 navBar.login: Login
-registerTemplate.title: "Sign Up"
+registerTemplate.title: 'Sign Up'
 registerTemplate.button: Register
 'Forgot Password ?': 'Forgot Password ?'
 'Not registered yet ?': 'Not registered yet ?'
 'Create an account': 'Create an account'
+accountShow.profile: Profile
+accountShow.Accountcreatedon: 'Account created on'
+accountShow.EditAccount: 'Edit Account'
+'Reset your password': 'Reset your password'
+"Enter your email address, and we will send you a\n                        link to reset your password.": "Enter your email address, and we will send you a\n                        link to reset your password."
+'Send password reset email': 'Send password reset email'
+'Reset password': 'Reset password'
+'Please sign in': 'Please sign in'
+'Account successfuly updated !': 'Account successfuly updated !'
+'Update Profile': 'Update Profile'
+'Apply changes': 'Apply changes'

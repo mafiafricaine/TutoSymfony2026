@@ -8,7 +8,9 @@
 		<article>
             <h1>{{ recipe.title | title }}</h1>
             <p>Temps de préparation : {{ recipe.duration }} min</p>
-            <img src= {{ recipe.imageName }} style="max-width: 400px;">  
+            <img src= {{ vich_uploader_asset(recipe, 'imageFile') }} style="max-width: 400px;">
+
+            {# <img src= {{ recipe.imageName }} style="max-width: 400px;">   #}
             {# <img src="https://kelianfood.com/wp-content/uploads/2022/11/IMG_3695.jpg" width="500" height="400">   #}
             <p>{{ recipe.content | nl2br}} </p>
             <small>

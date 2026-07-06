@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class RecipeType extends AbstractType
@@ -29,11 +30,18 @@ class RecipeType extends AbstractType
             ->add('content', TextareaType::class,[
                 'label' => "recipeForm.content"
             ])
-            ->add('imageName',TextType::class,[
-                'label' => "recipeForm.imageName"
-            ])
             ->add('duration',NumberType::class,[
                 'label' => "recipeForm.duration"
+            ])
+            ->add('imageFile', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'delete_label' => 'Delete Profil Image',
+            // 'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+            'imagine_pattern' => 'avatar_thumbnail',
+            'asset_helper' => true,
             ])
             ->add('save',SubmitType::class,[
                 'label' => "recipeForm.save"

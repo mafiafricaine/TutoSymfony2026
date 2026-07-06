@@ -8,3 +8,5 @@ registerForm.lastname: Nom
 registerForm.email: 'Adresse éléctronique'
 registerForm.plainPassword: 'Mot de passe'
 registerForm.agreeTerms: 'Veuillez accepter les termes'
+userForm.firstname: Prenom
+userForm.lastname: Nom

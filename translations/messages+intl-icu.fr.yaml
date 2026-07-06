@@ -13,6 +13,25 @@ registerTemplate.button: "S'enregistrer"
 recipeController.index.emailNotVerified: "Votre adresse mail n'est pas vérifiée !"
 'Reset your password': 'Réinitialiser votre mot de passe'
 "Enter your email address, and we will send you a\n                        link to reset your password.": "Introduire votre adresse mail, et on vous enverra un\n                        lien pour réinitialiser votre mot de passe."
-'Send password reset email': "Modifier le mot de passe"
+'Send password reset email': 'Modifier le mot de passe'
 'Reset password': 'Réinitialiser mot de passe'
-'Please sign in': 'Connectez-vous'
+'Please sign in': Connectez-vous
+accountShow.profile: 'Mon compte'
+accountShow.Accountcreatedon: 'Compte créé le'
+accountShow.EditAccount: 'Modifier profile'
+'Account successfuly updated !': 'Compte modifié avec succès !'
+'Update Profile': 'Modifier profil'
+'Apply changes': 'Appliquer les changements'
+'You must confirm your email to edit Recipe !': 'Vous devez confirmer votre mail pour editer une Recette !'
+'You must be the user ': "Vous devez être l'utilisateur "
+' to edit this recipe': ' pour éditer cette Recette'
+'You must login to edit Recipe !': 'Vous devez vous connecter pour éditer une Recette !'
+'You must confirm your email to create Recipe !': 'Vous devez confirmer votre email pour créer une Recette !'
+'You must login to create Recipe !': 'Vous devez vous connecter pour créer une Recette !'
+'You must confirm your email to delete Recipe !': 'Vous devez confirmer votre email pour supprimer une Recette !'
+' to delete this recipe': ' pour supprimer cette recette !'
+'You must login to delete Recipe !': 'Vous devez vous connecter pour supprimer une Recette !'
+'The recipe was successfully modified !': 'La recette a bien été midifiée !'
+'The recipe ': 'La recette '
+' was successfully created': ' a bien été créée !'
+' was successfully deleted !': ' a bien été supprimée !'
