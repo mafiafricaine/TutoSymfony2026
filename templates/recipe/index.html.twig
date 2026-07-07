@@ -23,6 +23,9 @@
                 <p>Pas encore de recette</p>
             {% endfor %}
         </div>
+        <div class="navigation d-flex justify-content-center mb-8">
+            {{ knp_pagination_render(recipes) }}
+        </div>
     </div>
 {% endblock %}
 

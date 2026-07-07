@@ -5,19 +5,20 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
-use DateTimeImmutable;
+// use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+// use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
+// use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
 {
     #[Route(path: "/recette", name: "app_recipe_index")]
-    public function index(RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    public function index(RecipeRepository $repository,  TranslatorInterface $translator, Request $request): Response
     {
         if ($this->getUser()) {
             /**
@@ -30,7 +31,16 @@ final class RecipeController extends AbstractController
         }
         //va recuperer toutes les recettes (equivalent Select *)
         //en utilisant RecipeRepository
-        $recipes = $repository->findAll();
+        //la pagination sans passer par repository
+        // $data = $repository->findAll();
+        // $recipes = $paginatorInterface->paginate(
+        //     $data,
+        //     $request->query->getInt('page',1),
+        //     9
+        // );
+
+        //la pagination en passant par recipe repository
+        $recipes = $repository->findRecipes($request->query->getInt('page',1));
         /*va recuperer toutes les recettes (equivalent Select *)
         //en utilisant RecipeRepository
         // $recipes = $em->getRepository(Recipe::class)->findAll();
