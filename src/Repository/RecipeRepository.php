@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Recipe;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -41,9 +42,29 @@ class RecipeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        $recipes = $this->paginatorInterface->paginate($data,$page,9);
+        $recipes = $this->paginatorInterface->paginate($data, $page, 9);
         return $recipes;
+    }
 
+    /**   
+     *@param SearchData $searchData
+     *@return PaginationInterface
+     */
+    public function findBySearch(SearchData $searchData): PaginationInterface
+    {
+        $data = $this->createQueryBuilder('r');
+        if (!empty($searchData->q)) {
+            $data = $data
+                ->andWhere("r.title LIKE :q")
+                ->setParameter("q", "%{$searchData->q}%");
+        }
+
+        $data = $data
+            ->getQuery()
+            ->getResult();
+
+        $recipes = $this->paginatorInterface->paginate($data, $searchData->page, 6);
+        return $recipes;
     }
 
     //    /**

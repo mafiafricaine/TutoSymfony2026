@@ -7,6 +7,9 @@
 {% set nbRecipe = recipes|length %}
     <h1 align="center">Bienvenue dans la liste des Recettes ({{ nbRecipe }})</h1>
     <div class = "container text-center">
+        {% include "/layouts/partials/_search_data.html.twig" with {
+            form: form
+        } only %}
         <div class = "row">
             {% for recipe in recipes %}
                 <div class="card max-w-sm col-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
