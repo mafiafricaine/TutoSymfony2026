@@ -12,12 +12,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
+use ApiPlatform\Metadata\ApiResource;
+
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\Table(name: "recipes")]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity('title')]
 #[Vich\Uploadable]
+#[ApiResource]
 class Recipe
 {
     #[ORM\Id]

@@ -39,6 +39,7 @@ class RecipeRepository extends ServiceEntityRepository
     public function findRecipes(int $page): PaginationInterface
     {
         $data =  $this->createQueryBuilder('r')
+            ->orderBy('r.id', 'ASC')
             ->getQuery()
             ->getResult();
 
